@@ -32,22 +32,22 @@ mongoose.connect(process.env.MONGO_URI, {
 });
 
 //Send Hourly Emails
-// cron.schedule('*/3 * * * *', async () => {  
-//   try {
-//     const users = await User.find(); // Get all users
+cron.schedule('0 */3 * * *', async () => {  
+  try {
+    const users = await User.find(); // Get all users
 
-//     for (const user of users) {
-//       const report = await generateWeatherText(user);
-//       if (!report) continue;
+    for (const user of users) {
+      const report = await generateWeatherText(user);
+      if (!report) continue;
 
-//       await sendEmail(user.email, 'Weather Report', report);
-//     }
+      await sendEmail(user.email, 'Weather Report', report);
+    }
 
-//     console.log('Weather emails sent!');
-//   } catch (error) {
-//     console.error('Error sending weather emails:', error);
-//   }
-// });
+    console.log('Weather emails sent!');
+  } catch (error) {
+    console.error('Error sending weather emails:', error);
+  }
+});
 
 
 // Start the Server
